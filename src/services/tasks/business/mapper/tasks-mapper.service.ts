@@ -28,11 +28,11 @@ async function mapToTasksDTO(data: TaskEntity[]): Promise<TaskDTO> {
 async function mapToTaskEntity(data: TaskRequestDTO): Promise<TaskEntity> {
 
     return {
-        id: uuidV4(),
+        id: data.id || uuidV4(),
         title: data.title ,
         description: data.description || '',
         priority: data.priority || TasksPriorityOptionsConstants.LOW,
-        completed: false,
+        completed: data.status === TasksStatusOptionsConstants.CLOSED,
         creationDate: moment().format('L')
     }
 }

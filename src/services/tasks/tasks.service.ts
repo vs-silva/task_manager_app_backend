@@ -31,7 +31,8 @@ export function TasksService(reader: TasksReaderDrivenPorts, writer: TasksWriter
             return;
         }
 
-        const result: TaskEntity = Object.assign(<TaskEntity>{}, requestDTO);
+        const mappedResult = await TasksMapperService.mapToTaskEntity(requestDTO);
+        const result: TaskEntity = Object.assign(<TaskEntity>entities[0], mappedResult);
         return await writer.write(result);
     }
 
